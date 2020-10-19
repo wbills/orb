@@ -397,6 +397,11 @@ func encodeValue(v interface{}) (*vectortile.Tile_Value, error) {
 		tv.DoubleValue = &t
 	case bool:
 		tv.BoolValue = &t
+    case *int32:
+        i := int64(*t)
+        tv.SintValue = &i
+    case *float64:
+        tv.DoubleValue = t
 	default:
 		return nil, errors.Errorf("unable to encode value of type %T: %v", v, v)
 	}
